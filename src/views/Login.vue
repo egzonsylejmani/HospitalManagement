@@ -16,28 +16,26 @@
       <div>
         <label class="block mb-2 text-indigo-500" for="email"> Email </label>
         <input
-          class="w-full p-2 mb-6 text-indigo-700 border-b-2 border-indigo-500 outline-none focus:bg-grey-300"
+          class="w-full p-2 text-indigo-700 border-b-2 border-indigo-500 outline-none focus:bg-grey-300"
           type="email"
           name="email"
           id="email"
           v-model="login_form.email"
         />
-        <p class="text-sm">{{ emailError }}</p>
+        <p class="text-sm text-red-500">{{ emailError }}</p>
       </div>
       <div>
         <label class="block mb-2 text-indigo-500" for="password">
           Password
         </label>
         <input
-          class="w-full p-2 mb-6 text-indigo-700 border-b-2 border-indigo-500 outline-none focus:bg-gray-300"
+          class="w-full p-2 text-indigo-700 border-b-2 border-indigo-500 outline-none focus:bg-gray-300"
           type="password"
           name="password"
           id="password"
           v-model="login_form.password"
         />
-        <p  class="text-red-500 text-sm">
-          {{ passwordError }}
-        </p>
+        <p class="text-sm text-red-500">{{ passwordError }}</p>
       </div>
       <div>
         <input
@@ -61,23 +59,52 @@
   </div>
 </template>
 <script>
-import axios from "axios";
 import { ref } from 'vue';
-import { useStore  } from 'vuex';
-export default {
-    setup() {
-        const login_form = ref({}); 
-        const store =  useStore();
+import { useStore } from 'vuex';
 
-        const login = () => {
-          store.dispatch('login', login_form.value);
+export default {
+  setup() {
+    const login_form = ref({});
+    const store = useStore();
+    const emailError = ref('');
+    const passwordError = ref('');
+    const error = ref('');
+
+    const login = async () => {
+      emailError.value = '';
+      passwordError.value = '';
+      error.value = '';
+
+      if (!login_form.value.email) {
+        emailError.value = 'Please enter your email.';
+        return;
+      }
+
+      if (!login_form.value.password) {
+        passwordError.value = 'Please enter your password.';
+        return;
+      }
+
+      try {
+        await store.dispatch('login', login_form.value);
+      } catch (err) {
+        if (err.code === 'auth/user-not-found') {
+          emailError.value = 'Email not found.';
+        } else if (err.code === 'auth/wrong-password') {
+          passwordError.value = 'Incorrect password.';
+        } else   {
+          error.value = err.message;
         }
-        
-        
-        return {
-            login_form,
-            login,
-        }
+      }
     }
+
+    return {
+      login_form,
+      login,
+      emailError,
+      passwordError,
+      error,
+    }
+  }
 }
 </script>
