@@ -12,7 +12,7 @@
       </h1>
     </div>
     <p v-if="error" class="text-red-500 text-center">{{ error }}</p>
-    <form class="login"  @submit.prevent="register">
+    <form class="login" @submit.prevent="register">
       <div>
         <label class="block mb-2 text-indigo-500" for="email"> Email </label>
         <input
@@ -57,8 +57,8 @@
   </div>
 </template>
 <script>
-import { ref } from 'vue';
-import { useStore } from 'vuex';
+import { ref } from "vue";
+import { useStore } from "vuex";
 
 export default {
   setup() {
@@ -68,20 +68,36 @@ export default {
 
     const register = async () => {
       try {
-        await store.dispatch('register', register_form.value);
+        await store.dispatch("register", register_form.value);
       } catch (err) {
-        error.value = err.response.data.error.message;
+        let errorMessage = "";
+        switch (err.code) {
+          case "auth/email-already-in-use":
+            errorMessage = "This email is already registered.";
+            break;
+          case "auth/invalid-email":
+            errorMessage = "The email address is invalid.";
+            break;
+          case "auth/weak-password":
+            errorMessage = "The password is too weak. It should include one Uppercase and !@#$%^";
+            break;
+          default:
+            errorMessage =
+              "An error occurred while trying to register. Please try again later.";
+            break;
+        }
+        error.value = errorMessage;
         setTimeout(() => {
           error.value = null;
         }, 5000);
       }
-    }
+    };
 
     return {
       register_form,
       register,
       error,
-    }
-  }
-}
+    };
+  },
+};
 </script>
