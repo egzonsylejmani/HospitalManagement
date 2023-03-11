@@ -15,21 +15,21 @@
           <div class="hidden md:block">
             <div class="ml-10 flex items-baseline w-full justify-between">
               <router-link
-                to="wards"
+                to="/wards"
                 exact-active-class="router-link-active"
                 class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
               >
                 Wards
               </router-link>
               <router-link
-                to="branches"
+                to="/branches"
                 exact-active-class="router-link-active"
                 class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
               >
                 Branches
               </router-link>
               <router-link
-                to="/"
+                to="/staff"
                 exact-active-class="router-link-active"
                 class="hover:bg-gray-700 text-white px-3 py-2 rounded-md text-sm font-medium"
               >

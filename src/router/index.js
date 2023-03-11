@@ -3,11 +3,21 @@ import HomeView from "../views/HomeView.vue";
 import ErrorPage from "../components/pages/errorpage.vue";
 import Unauthorized from "../components/pages/Unauthorized .vue";
 import Wards from "../components/Wards/Wards.vue";
+import Branches from "../components/Branches/Branches.vue";
+import Staff from "../components/Staff/Staff.vue";
 import Login from "../views/Login.vue";
 import Register from "../views/Register.vue";
 import Dashboard from "../components/Dashboard/Dashboard.vue";
 import { auth } from "../components/firebase/index";
 import firebase from "firebase/app";
+import Laboratory from "../components/Laboratories/Laboratory.vue";
+import DetailNursePage from "../views/DetailNursePage.vue";
+import SpecificWards from "../components/Wards/SpecificWards.vue";
+import DetailReceptionistPage from "../views/DetailReceptionistPage.vue";
+import DetailMedicalPage from "../views/DetailMedicalPage.vue";
+import DetailLaborantPage from "../views/DetailLaborantPage.vue";
+import DetailDriverPage from "../views/DetailDriverPage.vue";
+import DetailDoctorPage from "../views/DetailDoctorPage.vue";
 
 const router = createRouter({
   history: createWebHistory("/"),
@@ -50,6 +60,111 @@ const router = createRouter({
       },
     },
     {
+      path: "/wards/:ward",
+      name: "SpecificWards",
+      component: SpecificWards,
+      props: true,
+      meta: {
+        requiresAuth: false,
+        // requiresAdmin: true
+      },
+    },
+
+    {
+      path: "/nurses/:id",
+      name: "DetailNursePage",
+      component: DetailNursePage,
+      props: true,
+      meta: {
+        requiresAuth: false,
+        // requiresAdmin: true
+      },
+    },
+
+    {
+      path: "/receptionist/:id",
+      name: "DetailReceptionistPage",
+      component: DetailReceptionistPage,
+      props: true,
+      meta: {
+        requiresAuth: false,
+        // requiresAdmin: true
+      },
+    },
+
+    {
+      path: "/ambulance-drivers/:id",
+      name: "DetailDriverPage",
+      component: DetailDriverPage,
+      props: true,
+      meta: {
+        requiresAuth: false,
+        // requiresAdmin: true
+      },
+    },
+
+    {
+      path: "/doctors/:id",
+      name: "DetailDoctorPage",
+      component: DetailDoctorPage,
+      props: true,
+      meta: {
+        requiresAuth: false,
+        // requiresAdmin: true
+      },
+    },
+
+    {
+      path: "/laborants/:id",
+      name: "DetailLaborantPage",
+      component: DetailLaborantPage,
+      props: true,
+      meta: {
+        requiresAuth: false,
+        // requiresAdmin: true
+      },
+    },
+
+    {
+      path: "/medical-technicians/:id",
+      name: "DetailMedicalPage",
+      component: DetailMedicalPage,
+      props: true,
+      meta: {
+        requiresAuth: false,
+        // requiresAdmin: true
+      },
+    },
+
+    {
+      path: "/branches",
+      name: "Branches",
+      component: Branches,
+      meta: {
+        requiresAuth: false,
+        // requiresAdmin: true
+      },
+    },
+    {
+      path: "/staff",
+      name: "Staff",
+      component: Staff,
+      meta: {
+        requiresAuth: false,
+        // requiresAdmin: true
+      },
+    },
+    {
+      path: "/laboratories",
+      name: "Laboratories",
+      component: Laboratory,
+      meta: {
+        requiresAuth: false,
+        // requiresAdmin: true
+      },
+    },
+
+    {
       path: "/dashboard",
       name: "Dashboard",
       component: Dashboard,
@@ -72,6 +187,8 @@ router.beforeEach((to, from, next) => {
     return;
   }
   if (router.options.routes.some((route) => route.path === to.path)) {
+    next();
+  } else if (router.options.routes.some((route) => route.path === to.matched[0]?.path)) {
     next();
   } else {
     // if the route doesn't exist, redirect to your 404 page
