@@ -20,6 +20,24 @@
               <li :class="{ 'bg-gray-800': selectedTab === 'loginScreen' }" class="cursor-pointer px-4 py-2 hover:bg-gray-800 relative">
                 <a @click="selectedTab = 'allLaborants'">All Laborants</a>
               </li>
+              <li :class="{ 'bg-gray-800': selectedTab === 'loginScreen' }" class="cursor-pointer px-4 py-2 hover:bg-gray-800 relative">
+                <a @click="selectedTab = 'allLaboratories'">All Laboratories</a>
+              </li>
+              <li :class="{ 'bg-gray-800': selectedTab === 'loginScreen' }" class="cursor-pointer px-4 py-2 hover:bg-gray-800 relative">
+                <a @click="selectedTab = 'allmedicalTechnicians'">All Medical technicians</a>
+              </li>
+              <li :class="{ 'bg-gray-800': selectedTab === 'loginScreen' }" class="cursor-pointer px-4 py-2 hover:bg-gray-800 relative">
+                <a @click="selectedTab = 'allNurses'">All Nurses</a>
+              </li>
+              <li :class="{ 'bg-gray-800': selectedTab === 'loginScreen' }" class="cursor-pointer px-4 py-2 hover:bg-gray-800 relative">
+                <a @click="selectedTab = 'allPatients'">All Patients </a>
+              </li>
+              <li :class="{ 'bg-gray-800': selectedTab === 'loginScreen' }" class="cursor-pointer px-4 py-2 hover:bg-gray-800 relative">
+                <a @click="selectedTab = 'allReceptionists'">All Receptionists </a>
+              </li>
+              <li :class="{ 'bg-gray-800': selectedTab === 'loginScreen' }" class="cursor-pointer px-4 py-2 hover:bg-gray-800 relative">
+                <a @click="selectedTab = 'allSecurities'">All Securities </a>
+              </li>
             <li :class="{ 'bg-gray-800': selectedTab === 'settings' }" class="cursor-pointer px-4 py-2 hover:bg-gray-800 relative">
               <a @click="selectedTab = 'settings'">Settings</a>
             </li>
@@ -41,6 +59,12 @@
   import AllDoctors from '../Doctors/AllDoctors.vue';
   import AllDriver from '../AmbulanceDrivers/AllDriver.vue';
   import AllLaborants from '../Laborants/AllLaborants.vue';
+  import AllLaboratories from '../Laboratories/AllLaboratories.vue';
+  import AllmedicalTechnicians from '../MedicalTechnicians/AllmedicalTechnicians.vue'
+  import AllNurses from '../Nurses/AllNurses.vue'
+  import AllPatients from '../Patients/AllPatients.vue'
+  import AllReceptionists from '../Receptionists/AllReceptionists.vue'
+  import AllSecurities from '../Securities/AllSecurities.vue'
   export default {
     data() {
       return {
@@ -54,7 +78,13 @@
       AllWards,
       AllDoctors,
       AllDriver,
-      AllLaborants
+      AllLaborants,
+      AllLaboratories,
+      AllmedicalTechnicians,
+      AllNurses,
+      AllPatients,
+      AllReceptionists,
+      AllSecurities
     }
   };
   </script>
