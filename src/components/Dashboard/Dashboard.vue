@@ -14,9 +14,16 @@
              <li :class="{ 'bg-gray-800': selectedTab === 'loginScreen' }" class="cursor-pointer px-4 py-2 hover:bg-gray-800 relative">
                 <a @click="selectedTab = 'allDoctors'">All Doctors</a>
               </li>
+              <li :class="{ 'bg-gray-800': selectedTab === 'loginScreen' }" class="cursor-pointer px-4 py-2 hover:bg-gray-800 relative">
+                <a @click="selectedTab = 'allDriver'">All Ambulance drivers</a>
+              </li>
+              <li :class="{ 'bg-gray-800': selectedTab === 'loginScreen' }" class="cursor-pointer px-4 py-2 hover:bg-gray-800 relative">
+                <a @click="selectedTab = 'allLaborants'">All Laborants</a>
+              </li>
             <li :class="{ 'bg-gray-800': selectedTab === 'settings' }" class="cursor-pointer px-4 py-2 hover:bg-gray-800 relative">
               <a @click="selectedTab = 'settings'">Settings</a>
             </li>
+            
           </ul>
         </nav>
       </div>
@@ -32,6 +39,8 @@
   import Wards from '../Wards/Wards.vue';
   import AllWards from '../Wards/AllWards.vue'
   import AllDoctors from '../Doctors/AllDoctors.vue';
+  import AllDriver from '../AmbulanceDrivers/AllDriver.vue';
+  import AllLaborants from '../Laborants/AllLaborants.vue';
   export default {
     data() {
       return {
@@ -43,8 +52,9 @@
     components: {
       Wards,
       AllWards,
-      AllDoctors
-
+      AllDoctors,
+      AllDriver,
+      AllLaborants
     }
   };
   </script>
