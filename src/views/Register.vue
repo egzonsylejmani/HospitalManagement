@@ -79,7 +79,8 @@ export default {
             errorMessage = "The email address is invalid.";
             break;
           case "auth/weak-password":
-            errorMessage = "The password is too weak. It should include one Uppercase and !@#$%^";
+            errorMessage =
+              "The password is too weak. It should include one Uppercase and !@#$%^";
             break;
           default:
             errorMessage =

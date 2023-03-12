@@ -12,7 +12,7 @@
       </h1>
     </div>
     <p v-if="error" class="text-red-500 text-center">{{ error }}</p>
-    <form class="login"  @submit.prevent="login">
+    <form class="login" @submit.prevent="login">
       <div>
         <label class="block mb-2 text-indigo-500" for="email"> Email </label>
         <input
@@ -59,44 +59,44 @@
   </div>
 </template>
 <script>
-import { ref } from 'vue';
-import { useStore } from 'vuex';
+import { ref } from "vue";
+import { useStore } from "vuex";
 
 export default {
   setup() {
     const login_form = ref({});
     const store = useStore();
-    const emailError = ref('');
-    const passwordError = ref('');
-    const error = ref('');
+    const emailError = ref("");
+    const passwordError = ref("");
+    const error = ref("");
 
     const login = async () => {
-      emailError.value = '';
-      passwordError.value = '';
-      error.value = '';
+      emailError.value = "";
+      passwordError.value = "";
+      error.value = "";
 
       if (!login_form.value.email) {
-        emailError.value = 'Please enter your email.';
+        emailError.value = "Please enter your email.";
         return;
       }
 
       if (!login_form.value.password) {
-        passwordError.value = 'Please enter your password.';
+        passwordError.value = "Please enter your password.";
         return;
       }
 
       try {
-        await store.dispatch('login', login_form.value);
+        await store.dispatch("login", login_form.value);
       } catch (err) {
-        if (err.code === 'auth/user-not-found') {
-          emailError.value = 'Email not found.';
-        } else if (err.code === 'auth/wrong-password') {
-          passwordError.value = 'Incorrect password.';
-        } else   {
+        if (err.code === "auth/user-not-found") {
+          emailError.value = "Email not found.";
+        } else if (err.code === "auth/wrong-password") {
+          passwordError.value = "Incorrect password.";
+        } else {
           error.value = err.message;
         }
       }
-    }
+    };
 
     return {
       login_form,
@@ -104,7 +104,7 @@ export default {
       emailError,
       passwordError,
       error,
-    }
-  }
-}
+    };
+  },
+};
 </script>
