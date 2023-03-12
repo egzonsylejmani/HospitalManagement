@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "firebase":"cd src/components/firebase && firebase emulators:start",
+    "firebase": "cd src/components/firebase && firebase emulators:start",
     "serve": "vue-cli-service serve",
-    "backend":"cd backend && node app.js",
+    "backend": "cd backend && node app.js",
     "build": "vue-cli-service build"
   },
   "dependencies": {
@@ -21,7 +21,9 @@
     "util": "^0.12.5",
     "vite": "^4.1.4",
     "vue": "^3.2.13",
+    "vue-good-table": "^2.21.11",
     "vue-router": "^4.0.3",
+    "vuetify": "^3.1.8",
     "vuex": "^4.0.0"
   },
   "devDependencies": {

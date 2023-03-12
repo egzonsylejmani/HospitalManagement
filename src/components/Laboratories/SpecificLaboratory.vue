@@ -1,5 +1,6 @@
 
 <template>
+
     <div class="md:grid grid-cols-4 mt-12 mb-12 rounded-full">
         <div v-for="(item, index) in data" :key="index" class="md:px-4 my-3 rounded-full">
             <div class="bg-white rounded-full border-grey-300">
@@ -28,48 +29,34 @@
         </div>
     </div>
 </template>
-
 <script>
 import { ref } from 'vue'
 import axios from 'axios'
 
 export default {
-    name: 'SpecificWards',
+    name: 'SpecificLaboratories',
     data() {
         return {
-            ward: null,
+            lab: null,
             data: [],
         };
     },
     created() {
-        
-        const ward = this.$route.params.ward;
-        this.ward = ward;
-        const data = ref([]);
 
-        const returnAllBasedOnWard = async () => {
+        const lab = this.$route.params.laboratory;
+        this.lab = lab;
+        console.log(lab)
+        const data = ref([]);
+        const returnAllBasedOnLab = async () => {
             try {
-                const res = await axios.get(`http://localhost:3501/api/wards/specific/${ward}`);
-                let dataArr = [];
-                for (let i = 0; i < Object.keys(res.data).length; i++) {
-                    for (let j = 0; j < res.data[Object.keys(res.data)[i]].length; j++) {
-                        let role = Object.keys(res.data)[i];
-                        if (role.includes('Driver')) {
-                            role = 'Ambulance Driver';
-                        } else if (role.includes('MedicalTechnician')) {
-                            role = 'Medical Technician';
-                        }
-                        res.data[Object.keys(res.data)[i]][j]['role'] = role;
-                        dataArr.push(res.data[Object.keys(res.data)[i]][j]);
-                    }
-                }
-                data.value = dataArr;
+                const res = await axios.get(`http://localhost:3501/api/laboratories/specific/${this.lab}`);
+                data.value = res.data;
             } catch (error) {
                 alert(error);
             }
         };
 
-        returnAllBasedOnWard();
+        returnAllBasedOnLab();
         this.data = data;
     },
 };

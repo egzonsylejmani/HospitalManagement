@@ -17,6 +17,7 @@ import DetailMedicalPage from "../views/DetailMedicalPage.vue";
 import DetailLaborantPage from "../views/DetailLaborantPage.vue";
 import DetailDriverPage from "../views/DetailDriverPage.vue";
 import DetailDoctorPage from "../views/DetailDoctorPage.vue";
+import SpecificLaboratory from "../components/Laboratories/SpecificLaboratory.vue";
 
 const router = createRouter({
   history: createWebHistory("/"),
@@ -62,6 +63,16 @@ const router = createRouter({
       path: "/wards/:ward",
       name: "SpecificWards",
       component: SpecificWards,
+      props: true,
+      meta: {
+        requiresAuth: false,
+        // requiresAdmin: true
+      },
+    },
+    {
+      path: "/laboratories/:laboratory",
+      name: "SpecificLaboratory",
+      component: SpecificLaboratory,
       props: true,
       meta: {
         requiresAuth: false,

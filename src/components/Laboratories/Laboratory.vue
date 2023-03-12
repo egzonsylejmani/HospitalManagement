@@ -5,7 +5,7 @@
         </div>
         <div class="md:grid grid-cols-4 mt-12">
             <div v-for="(laboratory, index) in data" :key="index" class="md:px-4 my-3">
-                <router-link :to="laboratory.Ward">
+                <router-link :to="`/laboratories/`+ laboratory.Ward">
                     <div class="bg-white rounded-lg border border-gray-300">
                         <div class="w-full h-48 rounded-t-lg overflow-hidden bg-gray-300">
                             <img class="rounded-t-lg" :src="laboratory.Image" />
