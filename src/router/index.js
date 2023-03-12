@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import ErrorPage from "../components/pages/errorpage.vue";
-import Unauthorized from "../components/pages/Unauthorized .vue";
+import Unauthorized from "../components/pages/Unauthorized.vue";
 import Wards from "../components/Wards/Wards.vue";
 import Branches from "../components/Branches/Branches.vue";
 import Staff from "../components/Staff/Staff.vue";
@@ -9,7 +9,6 @@ import Login from "../views/Login.vue";
 import Register from "../views/Register.vue";
 import Dashboard from "../components/Dashboard/Dashboard.vue";
 import { auth } from "../components/firebase/index";
-import firebase from "firebase/app";
 import Laboratory from "../components/Laboratories/Laboratory.vue";
 import DetailNursePage from "../views/DetailNursePage.vue";
 import SpecificWards from "../components/Wards/SpecificWards.vue";
@@ -55,8 +54,8 @@ const router = createRouter({
       name: "Wards",
       component: Wards,
       meta: {
-        requiresAuth: false,
-        // requiresAdmin: true
+        requiresAuth: true,
+        requiresAdmin: true
       },
     },
     {
@@ -170,8 +169,8 @@ const router = createRouter({
       component: Dashboard,
     },
     {
-      path: "/Unauthorized ",
-      name: "Unauthorize",
+      path: "/unauthorized",
+      name: "Unauthorized",
       component: Unauthorized,
     },
   ],
@@ -196,19 +195,18 @@ router.beforeEach((to, from, next) => {
   }
   next();
   // check if the route being navigated to exists in your routes
-});
-router.beforeEach((to, from, next) => {
+});router.beforeEach((to, from, next) => {
   const requiresAdmin = to.matched.some((record) => record.meta.requiresAdmin);
   const currentUser = auth.currentUser;
 
   if (requiresAdmin && currentUser) {
     currentUser
-      .getIdTokenResult()
+      .getIdTokenResult(true) // pass true to force token refresh
       .then((idTokenResult) => {
         if (idTokenResult.claims.admin === true) {
           next();
         } else {
-          next("/Unauthorized");
+          next("/unauthorized");
         }
       })
       .catch((error) => {
@@ -219,7 +217,6 @@ router.beforeEach((to, from, next) => {
     next();
   }
 });
-
 // Navigation guard to check if the user is a doctor
 router.beforeEach((to, from, next) => {
   const requiresDoctor = to.matched.some((record) => record.meta.requiresDoctor);
@@ -227,22 +224,23 @@ router.beforeEach((to, from, next) => {
 
   if (requiresDoctor && currentUser) {
     currentUser
-      .getIdTokenResult()
+      .getIdTokenResult(true) // pass true to force token refresh
       .then((idTokenResult) => {
         if (idTokenResult.claims.doctor === true) {
           next();
         } else {
-          next("/Unauthorized");
+          next("/unauthorized");
         }
       })
       .catch((error) => {
         console.error(error);
-        next("/Unauthorized");
+        next("/unauthorized");
       });
   } else {
     next();
   }
 });
+
 
 // Navigation guard to check if the user is a receptionist
 router.beforeEach((to, from, next) => {
