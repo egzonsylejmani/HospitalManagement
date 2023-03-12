@@ -1,7 +1,12 @@
 <template>
     <div class="flex justify-between mb-4">
+<<<<<<< Updated upstream
         <h1 class="text-2xl font-bold mb-4">Users</h1>
         <button  class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" @click="showAddModal = true">Add Patient</button>
+=======
+        <h1 class="text-2xl font-bold mb-4">Patients</h1>
+        <button  class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-1/5" @click="showAddModal = true">Add Patients</button>
+>>>>>>> Stashed changes
     </div>
     <div class="container mx-auto flex flex-col">
         <div class="overflow-x-auto">

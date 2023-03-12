@@ -1,6 +1,6 @@
 <template>
     <div class="flex justify-between mb-4">
-        <h1 class="text-2xl font-bold mb-4">Users</h1>
+        <h1 class="text-2xl font-bold mb-4">Laborants</h1>
 
          <button  class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" @click="showAddModal = true">Add User</button>
 
