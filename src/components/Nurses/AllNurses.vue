@@ -1,10 +1,7 @@
 <template>
     <div class="flex justify-between mb-4">
-        <h1 class="text-2xl font-bold mb-4">Users</h1>
-
-        <router-link to="/wards" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-            Add User
-        </router-link>
+        <h1 class="text-2xl font-bold mb-4">Nurses</h1>
+        <button  class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" @click="showAddModal = true">Add Nurses</button>
     </div>
     <div class="container mx-auto flex flex-col">
         <div class="overflow-x-auto">
@@ -45,6 +42,58 @@
             <pagination :data="users" :per-page="perPage" @pagination-change-page="setCurrentPage"></pagination>
         </div>
     </div>
+    
+    <div class="modal" v-if="editingUser">
+        <div class="modal-content">
+          <h2>Edit User</h2>
+          <form>
+            <div v-for="(value, key) in editingUser" :key="key" class="form-group">
+              <div v-if="key != '_id' && key != '__v' && key != 'updatedAt' && key != 'createdAt'" class="form-group">
+              <label :for="key">{{ key }}:</label>
+              <input type="text" v-model="editingUser[key]" :id="key">
+              </div>
+            </div>
+            <button @click.prevent="saveUser">{{ editingUser.id ? 'Save' : 'Add' }}</button>
+            <button @click.prevent="cancelEdit">Cancel</button>
+          </form>
+        </div>
+      </div>
+
+
+  <div class="modal" v-if="showAddModal">
+    <div class="modal-content">
+      <h2>Add Technician</h2>
+      <form>
+        <div class="form-group">
+          <label for="name">Name:</label>
+          <input type="text" v-model="newUser.Firstname" id="name">
+        </div>
+        <div class="form-group">
+            <label for="name">Last Name:</label>
+            <input type="text" v-model="newUser.Lastname" id="lastname">
+          </div>
+        <div class="form-group">
+          <label for="image">Phone:</label>
+          <input type="text" v-model="newUser.Phone" id="phone">
+        </div>
+        <div class="form-group">
+            <label for="image">Ward:</label>
+            <input type="text" v-model="newUser.Ward" id="ward">
+          </div>
+          <div class="form-group">
+            <label for="image">Email:</label>
+            <input type="text" v-model="newUser.Email" id="email">
+          </div>
+          <div class="form-group">
+            <label for="image">Birthdate</label>
+            <input type="text" v-model="newUser.BirthDate" id="birthdate">
+          </div>
+        
+        <button @click.prevent="addUser">Save</button>
+        <button @click.prevent="showAddModal = false">Cancel</button>
+      </form>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -60,6 +109,10 @@ export default {
             users: [],
             currentPage: 1,
             perPage: 10,
+            editingUser: null,
+            newUser: {
+      },
+      showAddModal: false
         };
     },
     computed: {
@@ -69,29 +122,60 @@ export default {
             return this.users.slice(start, end);
         },
     },
-    methods: {
-        editUser(user) {
-            this.$router.push(`http://localhost:3501/api/nurses/${user._id}`);
-        },
-        deleteUser(user) {
-            if (
-                confirm(`Are you sure you want to delete ${user.Name} ${user.Image}?`)
-            ) {
-                axios
-                    .delete(`http://localhost:3501/api/nurses/${user._id}`)
-                    .then(() => {
-                        this.users.splice(this.users.indexOf(user), 1);
-                        this.$toast.success(
-                            `${user.Name} ${user.Image} deleted successfully.`
-                        );
-                    })
-                    .catch(() => {
-                        this.$toast.error(
-                            `Failed to delete ${user.Name} ${user.Image}. Please try again later.`
-                        );
-                    });
-            }
-        },
+    methods:{
+    addUser() {
+      axios.post('http://localhost:3501/api/nurses', this.newUser)
+        .then(response => {
+          if(response.data.message.includes("with success")){
+            this.getUsers()
+
+            this.newUser = {};
+            this.showAddModal = false;
+          }else{
+            alert("Failed to add this user")
+          }
+        })
+        .catch(error => {
+           alert(error.response.data[Object.keys(error.response.data)[0]])
+
+          console.log(error);
+        });
+    },
+     saveUser() {
+      axios.put(`http://localhost:3501/api/nurses/${this.editingUser._id}`, this.editingUser)
+        .then(() => {
+          this.editingUser = null;
+          this.getUsers();
+          this.$toast.success("User updated successfully.");
+        })
+        .catch(() => {
+          this.$toast.error("Failed to update user. Please try again later.");
+        });
+    },
+    cancelEdit() {
+      this.editingUser = null;
+    },
+    editUser(user) {
+      this.editingUser = { ...user };
+
+    },
+    deleteUser(user) {
+      if (
+        confirm(`Are you sure you want to delete ${user.Name} ${user.Image}?`)
+      ) {
+        axios
+          .delete(`http://localhost:3501/api/nurses/${user._id}`)
+          .then(() => {
+            this.users.splice(this.users.indexOf(user), 1);
+            alert(
+              `${user.Name} ${user.Image} deleted successfully.`
+            );
+          })
+          .catch((e) => {
+          alert(e)
+          });
+      }
+    },
         setCurrentPage(page) {
             this.currentPage = page;
         },
