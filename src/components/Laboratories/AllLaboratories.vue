@@ -12,6 +12,7 @@
 
                         <th class="border px-4 py-2">Type</th>       
 
+                        <th class="border px-4 py-2">Action</th>   
                     </tr>
                 </thead>
                 <tbody>
