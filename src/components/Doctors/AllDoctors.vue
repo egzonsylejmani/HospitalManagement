@@ -1,4 +1,6 @@
+
 <template>
+    
     <div class="flex justify-between mb-4">
         <h1 class="text-2xl font-bold mb-4">Users</h1>
 
@@ -43,6 +45,23 @@
             <pagination :data="users" :per-page="perPage" @pagination-change-page="setCurrentPage"></pagination>
         </div>
     </div>
+
+   <div class="modal" v-if="editingUser">
+      <div class="modal-content">
+        <h2>Edit User</h2>
+        <form>
+          <div v-for="(value, key) in editingUser" :key="key" class="form-group">
+            <div v-if="key != '_id' && key != '__v' && key != 'updatedAt' && key!='createdAt'" class="form-group">
+            <label :for="key">{{ key }}:</label>
+            <input type="text" v-model="editingUser[key]" :id="key">
+            </div>
+          </div>
+          <button @click.prevent="saveUser">{{ editingUser.id ? 'Save' : 'Add' }}</button>
+          <button @click.prevent="cancelEdit">Cancel</button>
+        </form>
+      </div>
+    </div>
+
 </template>
 
 <script>
@@ -57,7 +76,9 @@ export default {
         return {
             users: [],
             currentPage: 1,
-            perPage: 10,
+            perPage: 10, 
+            editingUser: null,
+
         };
     },
     computed: {
@@ -68,8 +89,22 @@ export default {
         },
     },
     methods: {
-        editUser(user) {
-            this.$router.push(`http://localhost:3501/api/doctors/${user._id}`);
+        saveUser() {
+            axios.put(`http://localhost:3501/api/doctors/${this.editingUser._id}`, this.editingUser)
+                .then(() => {
+                    this.editingUser = null;
+                    this.getUsers();
+                    this.$toast.success("User updated successfully.");
+                })
+                .catch(() => {
+                    this.$toast.error("Failed to update user. Please try again later.");
+                });
+        },
+        cancelEdit() {
+            this.editingUser = null;
+        },
+       editUser(user) {
+            this.editingUser = {...user};
         },
         deleteUser(user) {
             if (
@@ -152,4 +187,7 @@ th {
 .pagination-button:hover {
     background-color: #ddd;
 }
+
+
+
 </style>

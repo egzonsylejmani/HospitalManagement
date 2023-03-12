@@ -46,6 +46,15 @@
                 >
                   Laboratories
                 </router-link>
+
+                <router-link
+                      to="/dashboard"
+                      exact-active-class="active"
+                      :class="{ 'bg-white text-gray-800': $route.path === '/dashboard' }"
+                      class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                    >
+                      Dashboard
+                    </router-link>
               </div>
             </div>
           </div>
@@ -106,6 +115,7 @@
               >
                 Login
               </router-link>
+              
             </div>
           </div>
         </div>

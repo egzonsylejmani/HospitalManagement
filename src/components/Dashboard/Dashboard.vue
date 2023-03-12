@@ -32,9 +32,11 @@
               <li :class="{ 'bg-gray-800': selectedTab === 'loginScreen' }" class="cursor-pointer px-4 py-2 hover:bg-gray-800 relative">
                 <a @click="selectedTab = 'allPatients'">All Patients </a>
               </li>
+              <a @click="selectedTab = 'allReceptionists'">
               <li :class="{ 'bg-gray-800': selectedTab === 'loginScreen' }" class="cursor-pointer px-4 py-2 hover:bg-gray-800 relative">
-                <a @click="selectedTab = 'allReceptionists'">All Receptionists </a>
+                <a >All Receptionists </a>
               </li>
+               </a>
               <li :class="{ 'bg-gray-800': selectedTab === 'loginScreen' }" class="cursor-pointer px-4 py-2 hover:bg-gray-800 relative">
                 <a @click="selectedTab = 'allSecurities'">All Securities </a>
               </li>
@@ -73,9 +75,7 @@
   export default {
     data() {
       return {
-        selectedTab: 'allWards'        
-        // ,selectedTab: 'allDoctors'
-
+        selectedTab: 'allWards'       
       };
     },
     components: {

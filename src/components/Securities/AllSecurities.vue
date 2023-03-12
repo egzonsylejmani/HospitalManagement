@@ -15,7 +15,6 @@
                         <th class="border px-4 py-2">Surname</th>
                         <th class="border px-4 py-2">Phone</th>
                         <th class="border px-4 py-2">Ward</th>
-                        <th class="border px-4 py-2">Email</th>
                         <th class="border px-4 py-2">Actions</th>
                     </tr>
                 </thead>
@@ -24,8 +23,9 @@
                         <td class="border px-4 py-2">{{ user.Firstname }}</td>
                         <td class="border px-4 py-2">{{ user.Lastname }}</td>
                         <td class="border px-4 py-2">{{ user.Phone }}</td>
-                        <td class="border px-4 py-2">{{ user.Email }}</td>
-                         <td class="border px-4 py-2">{{ user.Ward }}</td>
+
+                        <td class="border px-4 py-2">{{ user.Ward }}</td>
+
 
                         <td class="border px-4 py-2 flex">
                             <button @click="editUser(user)"
