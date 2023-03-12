@@ -43,7 +43,8 @@ export default {
             try {
                 const res = await axios.get(`http://localhost:3501/api/${api}/${id}`);
 
-                data.value = res.data;
+                data.value = res.data; 
+   
             } catch (error) {
                 console.log(error);
             }

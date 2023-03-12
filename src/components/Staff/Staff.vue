@@ -62,8 +62,7 @@ export default {
                     res.data[Object.keys(res.data)[i]][j]['role'] = role;
                     data.push(res.data[Object.keys(res.data)[i]][j]);
                 }
-            }
-            debugger;
+            }         
             this.data = data;
         } catch (error) {
             console.error(error);
