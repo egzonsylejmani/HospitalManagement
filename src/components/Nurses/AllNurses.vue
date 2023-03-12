@@ -45,7 +45,7 @@
     
     <div class="modal" v-if="editingUser">
         <div class="modal-content">
-          <h2>Edit User</h2>
+          <h2>Edit Nurse</h2>
           <form>
             <div v-for="(value, key) in editingUser" :key="key" class="form-group">
               <div v-if="key != '_id' && key != '__v' && key != 'updatedAt' && key != 'createdAt'" class="form-group">
@@ -59,41 +59,49 @@
         </div>
       </div>
 
-
-  <div class="modal" v-if="showAddModal">
-    <div class="modal-content">
-      <h2>Add Technician</h2>
-      <form>
-        <div class="form-group">
-          <label for="name">Name:</label>
-          <input type="text" v-model="newUser.Firstname" id="name">
-        </div>
-        <div class="form-group">
-            <label for="name">Last Name:</label>
-            <input type="text" v-model="newUser.Lastname" id="lastname">
-          </div>
-        <div class="form-group">
-          <label for="image">Phone:</label>
-          <input type="text" v-model="newUser.Phone" id="phone">
-        </div>
-        <div class="form-group">
-            <label for="image">Ward:</label>
-            <input type="text" v-model="newUser.Ward" id="ward">
-          </div>
-          <div class="form-group">
-            <label for="image">Email:</label>
-            <input type="text" v-model="newUser.Email" id="email">
-          </div>
-          <div class="form-group">
-            <label for="image">Birthdate</label>
-            <input type="text" v-model="newUser.BirthDate" id="birthdate">
-          </div>
+    <div class="modal" v-if="showAddModal">
+          <div class="modal-content">
+            <h2>Add Nurse</h2>
+            <form>
+              <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" v-model="newUser.Firstname" id="name">
+              </div>
+              <div class="form-group">
+                  <label for="name">Last Name:</label>
+                  <input type="text" v-model="newUser.Lastname" id="lastname">
+                </div>
+              <div class="form-group">
+                <label for="phone">Phone:</label>
+                <input type="text" v-model="newUser.Phone" id="phone">
+              </div>
+              <div class="form-group">
+                  <label for="ward">Ward:</label>
+                  <input type="text" v-model="newUser.Ward" id="ward">
+                </div>
+                <div class="form-group">
+                  <label for="email">Email:</label>
+                  <input type="email" v-model="newUser.Email" id="email">
+                </div>
+                <div class="form-group">
+                      <label for="image">Image:</label>
+                      <input type="text" v-model="newUser.Image" id="image">
+                  </div>
+                <div class="form-group">
+                  <label for="image">Birthdate</label>
+                  <input type="text" v-model="newUser.BirthDate" id="birthdate">
+                </div>
+                <div class="form-group">
+                      <label for="speciality">Speciality:</label>
+                      <input type="text" v-model="newUser.Speciality" id="speciality">
+                  </div>
+  
         
-        <button @click.prevent="addUser">Save</button>
-        <button @click.prevent="showAddModal = false">Cancel</button>
-      </form>
-    </div>
-  </div>
+              <button @click.prevent="addUser">Save</button>
+              <button @click.prevent="showAddModal = false">Cancel</button>
+            </form>
+          </div>
+        </div>
 </template>
 
 <script>
@@ -161,14 +169,14 @@ export default {
     },
     deleteUser(user) {
       if (
-        confirm(`Are you sure you want to delete ${user.Name} ${user.Image}?`)
+        confirm(`Are you sure you want to delete ${user.Firstname} ${user.Lastname}?`)
       ) {
         axios
           .delete(`http://localhost:3501/api/nurses/${user._id}`)
           .then(() => {
             this.users.splice(this.users.indexOf(user), 1);
             alert(
-              `${user.Name} ${user.Image} deleted successfully.`
+              `${user.Firstname} ${user.Lastname} deleted successfully.`
             );
           })
           .catch((e) => {

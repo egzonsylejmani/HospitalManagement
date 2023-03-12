@@ -8,14 +8,19 @@
             <table class="table-auto w-full border">
                 <thead>
                     <tr>
-                        <th class="border px-4 py-2">Type</th>
-                        <th class="border px-4 py-2">Ward</th>
+                        <th class="border px-4 py-2">Ward</th>     
+
+                        <th class="border px-4 py-2">Type</th>       
+
                     </tr>
                 </thead>
                 <tbody>
                     <tr v-for="user in displayedUsers" :key="user.id">
+                                                 <td class="border px-4 py-2">{{ user.Ward }}</td>                                              
+
                         <td class="border px-4 py-2">{{ user.Type }}</td>
-                         <td class="border px-4 py-2">{{ user.Ward }}</td>
+
+
 
                         <td class="border px-4 py-2 flex">
                             <button @click="editUser(user)"
@@ -37,7 +42,7 @@
     </div>
     <div class="modal" v-if="editingUser">
         <div class="modal-content">
-          <h2>Edit User</h2>
+          <h2>Edit Laboratory</h2>
           <form>
             <div v-for="(value, key) in editingUser" :key="key" class="form-group">
               <div v-if="key != '_id' && key != '__v' && key != 'updatedAt' && key != 'createdAt'" class="form-group">
@@ -54,16 +59,20 @@
 
   <div class="modal" v-if="showAddModal">
     <div class="modal-content">
-      <h2>Add Ward</h2>
+      <h2>Add Laboratory</h2>
       <form>
         <div class="form-group">
           <label for="name">Type:</label>
           <input type="text" v-model="newUser.Type" id="Type">
         </div>
         <div class="form-group">
-            <label for="image">Ward:</label>
+            <label for="name">Ward:</label>
             <input type="text" v-model="newUser.Ward" id="ward">
         </div>
+        <div class="form-group">
+                <label for="image">Image:</label>
+                <input type="text" v-model="newUser.Image" id="image">
+            </div>
         <button @click.prevent="addUser">Save</button>
         <button @click.prevent="showAddModal = false">Cancel</button>
       </form>
@@ -136,14 +145,14 @@ export default {
     },
     deleteUser(user) {
       if (
-        confirm(`Are you sure you want to delete ${user.Name} ${user.Image}?`)
+        confirm(`Are you sure you want to delete ${user.Ward} ?`)
       ) {
         axios
           .delete(`http://localhost:3501/api/laboratories/${user._id}`)
           .then(() => {
             this.users.splice(this.users.indexOf(user), 1);
             alert(
-              `${user.Name} ${user.Image} deleted successfully.`
+              `${user.Ward}  deleted successfully.`
             );
           })
           .catch((e) => {

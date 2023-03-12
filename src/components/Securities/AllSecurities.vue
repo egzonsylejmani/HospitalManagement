@@ -42,9 +42,27 @@
             <pagination :data="users" :per-page="perPage" @pagination-change-page="setCurrentPage"></pagination>
         </div>
     </div>
+
+
+      <div class="modal" v-if="editingUser">
+            <div class="modal-content">
+              <h2>Edit Security</h2>
+              <form>
+                <div v-for="(value, key) in editingUser" :key="key" class="form-group">
+                  <div v-if="key != '_id' && key != '__v' && key != 'updatedAt' && key != 'createdAt'" class="form-group">
+                  <label :for="key">{{ key }}:</label>
+                  <input type="text" v-model="editingUser[key]" :id="key">
+                  </div>
+                </div>
+                <button @click.prevent="saveUser">{{ editingUser.id ? 'Save' : 'Add' }}</button>
+                <button @click.prevent="cancelEdit">Cancel</button>
+              </form>
+            </div>
+          </div>
+
     <div class="modal" v-if="showAddModal">
         <div class="modal-content">
-          <h2>Add Technician</h2>
+          <h2>Add Security</h2>
           <form>
             <div class="form-group">
               <label for="name">Name:</label>
@@ -143,14 +161,14 @@ export default {
     },
     deleteUser(user) {
       if (
-        confirm(`Are you sure you want to delete ${user.Name} ${user.Image}?`)
+                confirm(`Are you sure you want to delete ${user.Firstname} ${user.Lastname}?`)
       ) {
         axios
           .delete(`http://localhost:3501/api/securities/${user._id}`)
           .then(() => {
             this.users.splice(this.users.indexOf(user), 1);
             alert(
-              `${user.Name} ${user.Image} deleted successfully.`
+              `${user.Firstname} ${user.Lastname} deleted successfully.`
             );
           })
           .catch((e) => {

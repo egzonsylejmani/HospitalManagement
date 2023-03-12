@@ -1,7 +1,7 @@
 <template>
     <div class="flex justify-between mb-4">
     <h1 class="text-2xl font-bold mb-4">Users</h1>
-    <button  class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" @click="showAddModal = true">Add User</button>
+    <button  class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" @click="showAddModal = true">Add Ward</button>
 
   
     </div>
@@ -11,7 +11,7 @@
         <thead>
           <tr>
             <th class="border px-4 py-2">Name</th>
-            <th class="border px-4 py-2">Surname</th>
+            <th class="border px-4 py-2">Image</th>
             <th class="border px-4 py-2">Actions</th>
           </tr>
         </thead>
@@ -48,7 +48,7 @@
 
   <div class="modal" v-if="editingUser">
         <div class="modal-content">
-          <h2>Edit User</h2>
+          <h2>Edit Ward</h2>
           <form>
             <div v-for="(value, key) in editingUser" :key="key" class="form-group">
               <div v-if="key != '_id' && key != '__v' && key != 'updatedAt' && key != 'createdAt'" class="form-group">
@@ -65,7 +65,7 @@
 
   <div class="modal" v-if="showAddModal">
     <div class="modal-content">
-      <h2>Add User</h2>
+      <h2>Add Ward</h2>
       <form>
         <div class="form-group">
           <label for="name">Name:</label>
@@ -150,14 +150,14 @@ export default {
     },
     deleteUser(user) {
       if (
-        confirm(`Are you sure you want to delete ${user.Name} ${user.Image}?`)
+        confirm(`Are you sure you want to delete ${user.Name}?`)
       ) {
         axios
           .delete(`http://localhost:3501/api/wards/${user._id}`)
           .then(() => {
             this.users.splice(this.users.indexOf(user), 1);
             alert(
-              `${user.Name} ${user.Image} deleted successfully.`
+              `${user.Name}  deleted successfully.`
             );
           })
           .catch((e) => {

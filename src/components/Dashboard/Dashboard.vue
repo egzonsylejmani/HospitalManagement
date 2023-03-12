@@ -5,11 +5,11 @@
         <div class="p-4 font-bold uppercase">Dashboard</div>
         <nav class="px-2 py-4">
           <ul>
-            <li :class="{ 'bg-gray-800': selectedTab === 'wards' }" class="cursor-pointer px-4 py-2 hover:bg-gray-800 relative">
-              <a @click="selectedTab = 'wards'">Home</a>
+            <li :class="{ 'bg-gray-800': selectedTab === 'homeDashboard' }" class="cursor-pointer px-4 py-2 hover:bg-gray-800 relative">
+              <a @click="selectedTab = 'homeDashboard'">Home</a>
             </li>
             <li :class="{ 'bg-gray-800': selectedTab === 'loginScreen' }" class="cursor-pointer px-4 py-2 hover:bg-gray-800 relative">
-              <a @click="selectedTab = 'allWards'">AllWards</a>
+              <a @click="selectedTab = 'allWards'">All Wards</a>
             </li>
              <li :class="{ 'bg-gray-800': selectedTab === 'loginScreen' }" class="cursor-pointer px-4 py-2 hover:bg-gray-800 relative">
                 <a @click="selectedTab = 'allDoctors'">All Doctors</a>
@@ -44,9 +44,6 @@
                 <a @click="selectedTab = 'allTechnicians'">All Technicians </a>
               </li>
 
-            <li :class="{ 'bg-gray-800': selectedTab === 'settings' }" class="cursor-pointer px-4 py-2 hover:bg-gray-800 relative">
-              <a @click="selectedTab = 'settings'">Settings</a>
-            </li>
             
           </ul>
         </nav>
@@ -60,7 +57,7 @@
   </template>
   
   <script>
-  import Wards from '../Wards/Wards.vue';
+  import HomeDashboard from '../HomeDashboard.vue';
   import AllWards from '../Wards/AllWards.vue'
   import AllDoctors from '../Doctors/AllDoctors.vue';
   import AllDriver from '../AmbulanceDrivers/AllDriver.vue';
@@ -75,11 +72,11 @@
   export default {
     data() {
       return {
-        selectedTab: 'allWards'       
+        selectedTab: 'homeDashboard'       
       };
     },
     components: {
-      Wards,
+      HomeDashboard,
       AllWards,
       AllDoctors,
       AllDriver,

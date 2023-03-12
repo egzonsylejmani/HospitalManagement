@@ -3,10 +3,8 @@
     
     <div class="flex justify-between mb-4">
         <h1 class="text-2xl font-bold mb-4">Users</h1>
+                <button  class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" @click="showAddModal = true">Add Doctor</button>
 
-        <router-link to="/wards" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-            Add User
-        </router-link>
     </div>
     <div class="container mx-auto flex flex-col">
         <div class="overflow-x-auto">
@@ -48,7 +46,7 @@
 
    <div class="modal" v-if="editingUser">
       <div class="modal-content">
-        <h2>Edit User</h2>
+        <h2>Edit Doctor</h2>
         <form>
           <div v-for="(value, key) in editingUser" :key="key" class="form-group">
             <div v-if="key != '_id' && key != '__v' && key != 'updatedAt' && key!='createdAt'" class="form-group">
@@ -61,7 +59,53 @@
         </form>
       </div>
     </div>
-
+    <div class="modal" v-if="showAddModal">
+        <div class="modal-content">
+          <h2>Add Doctor</h2>
+          <form>
+            <div class="form-group">
+              <label for="name">Name:</label>
+              <input type="text" v-model="newUser.Firstname" id="name">
+            </div>
+            <div class="form-group">
+                <label for="name">Last Name:</label>
+                <input type="text" v-model="newUser.Lastname" id="lastname">
+              </div>
+            <div class="form-group">
+              <label for="phone">Phone:</label>
+              <input type="text" v-model="newUser.Phone" id="phone">
+            </div>
+            <div class="form-group">
+                <label for="ward">Ward:</label>
+                <input type="text" v-model="newUser.Ward" id="ward">
+              </div>
+              <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" v-model="newUser.Email" id="email">
+              </div>
+              <div class="form-group">
+                    <label for="image">Image:</label>
+                    <input type="text" v-model="newUser.Image" id="image">
+                </div>
+              <div class="form-group">
+                <label for="image">Birthdate</label>
+                <input type="text" v-model="newUser.BirthDate" id="birthdate">
+              </div>
+              <div class="form-group">
+                    <label for="speciality">Speciality:</label>
+                    <input type="text" v-model="newUser.Speciality" id="speciality">
+                </div>
+        
+            <div class="form-group">
+                <label for="appointments">Appointments:</label>
+                <input type="text" v-model="newUser.Appointments" id="appointments">
+            </div>
+        
+            <button @click.prevent="addUser">Save</button>
+            <button @click.prevent="showAddModal = false">Cancel</button>
+          </form>
+        </div>
+      </div>
 </template>
 
 <script>
@@ -78,7 +122,10 @@ export default {
             currentPage: 1,
             perPage: 10, 
             editingUser: null,
+            newUser: {
 
+            },
+            showAddModal: false
         };
     },
     computed: {
@@ -89,6 +136,24 @@ export default {
         },
     },
     methods: {
+       addUser() {
+            axios.post('http://localhost:3501/api/doctors', this.newUser)
+                .then(response => {
+                    if (response.data.message.includes("with success")) {
+                        this.getUsers()
+
+                        this.newUser = {};
+                        this.showAddModal = false;
+                    } else {
+                        alert("Failed to add this user")
+                    }
+                })
+                .catch(error => {
+                    alert(error.response.data[Object.keys(error.response.data)[0]])
+
+                    console.log(error);
+                });
+        },
         saveUser() {
             axios.put(`http://localhost:3501/api/doctors/${this.editingUser._id}`, this.editingUser)
                 .then(() => {
@@ -103,25 +168,24 @@ export default {
         cancelEdit() {
             this.editingUser = null;
         },
-       editUser(user) {
-            this.editingUser = {...user};
+        editUser(user) {
+            this.editingUser = { ...user };
+
         },
         deleteUser(user) {
             if (
-                confirm(`Are you sure you want to delete ${user.Name} ${user.Image}?`)
+                confirm(`Are you sure you want to delete ${user.Firstname} ${user.Lastname}?`)
             ) {
                 axios
                     .delete(`http://localhost:3501/api/doctors/${user._id}`)
                     .then(() => {
                         this.users.splice(this.users.indexOf(user), 1);
-                        this.$toast.success(
-                            `${user.Name} ${user.Image} deleted successfully.`
+                        alert(
+                            `${user.Firstname} ${user.Lastname} deleted successfully.`
                         );
                     })
-                    .catch(() => {
-                        this.$toast.error(
-                            `Failed to delete ${user.Name} ${user.Image}. Please try again later.`
-                        );
+                    .catch((e) => {
+                        alert(e)
                     });
             }
         },

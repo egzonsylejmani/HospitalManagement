@@ -44,7 +44,7 @@
     </div>
     <div class="modal" v-if="editingUser">
         <div class="modal-content">
-          <h2>Edit User</h2>
+          <h2>Edit Technician</h2>
           <form>
             <div v-for="(value, key) in editingUser" :key="key" class="form-group">
               <div v-if="key != '_id' && key != '__v' && key != 'updatedAt' && key != 'createdAt'" class="form-group">
@@ -160,14 +160,14 @@ export default {
     },
     deleteUser(user) {
       if (
-        confirm(`Are you sure you want to delete ${user.Name} ${user.Image}?`)
+        confirm(`Are you sure you want to delete ${user.Firstname} ${user.Lastname}?`)
       ) {
         axios
           .delete(`http://localhost:3501/api/technicians/${user._id}`)
           .then(() => {
             this.users.splice(this.users.indexOf(user), 1);
             alert(
-              `${user.Name} ${user.Image} deleted successfully.`
+              `${user.Firstname} ${user.Lastname} deleted successfully.`
             );
           })
           .catch((e) => {
