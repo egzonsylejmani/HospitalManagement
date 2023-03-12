@@ -38,6 +38,10 @@
               <li :class="{ 'bg-gray-800': selectedTab === 'loginScreen' }" class="cursor-pointer px-4 py-2 hover:bg-gray-800 relative">
                 <a @click="selectedTab = 'allSecurities'">All Securities </a>
               </li>
+              <li :class="{ 'bg-gray-800': selectedTab === 'loginScreen' }" class="cursor-pointer px-4 py-2 hover:bg-gray-800 relative">
+                <a @click="selectedTab = 'allTechnicians'">All Technicians </a>
+              </li>
+
             <li :class="{ 'bg-gray-800': selectedTab === 'settings' }" class="cursor-pointer px-4 py-2 hover:bg-gray-800 relative">
               <a @click="selectedTab = 'settings'">Settings</a>
             </li>
@@ -65,6 +69,7 @@
   import AllPatients from '../Patients/AllPatients.vue'
   import AllReceptionists from '../Receptionists/AllReceptionists.vue'
   import AllSecurities from '../Securities/AllSecurities.vue'
+  import AllTechnicians from '../Technicians/AllTechnicians.vue'
   export default {
     data() {
       return {
@@ -84,7 +89,8 @@
       AllNurses,
       AllPatients,
       AllReceptionists,
-      AllSecurities
+      AllSecurities,
+      AllTechnicians
     }
   };
   </script>
