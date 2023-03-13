@@ -5,44 +5,66 @@
         <div class="p-4 font-bold uppercase">Dashboard</div>
         <nav class="px-2 py-4">
           <ul>
+            <a @click="selectedTab = 'homeDashboard'">
             <li :class="{ 'bg-gray-800': selectedTab === 'homeDashboard' }" class="cursor-pointer px-4 py-2 hover:bg-gray-800 relative">
-              <a @click="selectedTab = 'homeDashboard'">Home</a>
+              <a>Home</a>
             </li>
+            </a>
+            <a @click="selectedTab = 'allWards'">
             <li :class="{ 'bg-gray-800': selectedTab === 'loginScreen' }" class="cursor-pointer px-4 py-2 hover:bg-gray-800 relative">
-              <a @click="selectedTab = 'allWards'">All Wards</a>
+              <a>All Wards</a>
             </li>
+            </a>
+            <a @click="selectedTab = 'allDoctors'">
              <li :class="{ 'bg-gray-800': selectedTab === 'loginScreen' }" class="cursor-pointer px-4 py-2 hover:bg-gray-800 relative">
-                <a @click="selectedTab = 'allDoctors'">All Doctors</a>
+                <a>All Doctors</a>
               </li>
+              </a>
+              <a @click="selectedTab = 'allDriver'">
               <li :class="{ 'bg-gray-800': selectedTab === 'loginScreen' }" class="cursor-pointer px-4 py-2 hover:bg-gray-800 relative">
-                <a @click="selectedTab = 'allDriver'">All Ambulance drivers</a>
+                <a>All Ambulance drivers</a>
               </li>
+              </a>
+              <a @click="selectedTab = 'allLaborants'">
               <li :class="{ 'bg-gray-800': selectedTab === 'loginScreen' }" class="cursor-pointer px-4 py-2 hover:bg-gray-800 relative">
-                <a @click="selectedTab = 'allLaborants'">All Laborants</a>
+                <a>All Laborants</a>
               </li>
+              </a>
+              <a @click="selectedTab = 'allLaboratories'">
               <li :class="{ 'bg-gray-800': selectedTab === 'loginScreen' }" class="cursor-pointer px-4 py-2 hover:bg-gray-800 relative">
-                <a @click="selectedTab = 'allLaboratories'">All Laboratories</a>
+                <a>All Laboratories</a>
               </li>
+              </a>
+              <a @click="selectedTab = 'allmedicalTechnicians'">
               <li :class="{ 'bg-gray-800': selectedTab === 'loginScreen' }" class="cursor-pointer px-4 py-2 hover:bg-gray-800 relative">
-                <a @click="selectedTab = 'allmedicalTechnicians'">All Medical technicians</a>
+                <a>All Medical technicians</a>
               </li>
+              </a>
+              <a @click="selectedTab = 'allNurses'">
               <li :class="{ 'bg-gray-800': selectedTab === 'loginScreen' }" class="cursor-pointer px-4 py-2 hover:bg-gray-800 relative">
-                <a @click="selectedTab = 'allNurses'">All Nurses</a>
+                <a>All Nurses</a>
               </li>
+              </a>
+              <a @click="selectedTab = 'allPatients'">
               <li :class="{ 'bg-gray-800': selectedTab === 'loginScreen' }" class="cursor-pointer px-4 py-2 hover:bg-gray-800 relative">
-                <a @click="selectedTab = 'allPatients'">All Patients </a>
+                <a>All Patients </a>
               </li>
+              </a>
               <a @click="selectedTab = 'allReceptionists'">
               <li :class="{ 'bg-gray-800': selectedTab === 'loginScreen' }" class="cursor-pointer px-4 py-2 hover:bg-gray-800 relative">
                 <a >All Receptionists </a>
               </li>
                </a>
+               <a @click="selectedTab = 'allSecurities'">
               <li :class="{ 'bg-gray-800': selectedTab === 'loginScreen' }" class="cursor-pointer px-4 py-2 hover:bg-gray-800 relative">
-                <a @click="selectedTab = 'allSecurities'">All Securities </a>
+                <a>All Securities </a>
               </li>
+              </a>
+              <a @click="selectedTab = 'allTechnicians'">
               <li :class="{ 'bg-gray-800': selectedTab === 'loginScreen' }" class="cursor-pointer px-4 py-2 hover:bg-gray-800 relative">
-                <a @click="selectedTab = 'allTechnicians'">All Technicians </a>
+                <a >All Technicians </a>
               </li>
+              </a>
 
             
           </ul>
