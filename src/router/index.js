@@ -56,7 +56,7 @@ const router = createRouter({
       component: Wards,
       meta: {
         requiresAuth: true,
-        requiresAdmin: true
+        requiresAdmin: false,
       },
     },
     {
@@ -65,8 +65,8 @@ const router = createRouter({
       component: SpecificWards,
       props: true,
       meta: {
-        requiresAuth: false,
-        // requiresAdmin: true
+        requiresAuth: true,
+        requiresAdmin: false,
       },
     },
     {
@@ -75,8 +75,8 @@ const router = createRouter({
       component: SpecificLaboratory,
       props: true,
       meta: {
-        requiresAuth: false,
-        // requiresAdmin: true
+        requiresAuth: true,
+        requiresAdmin: false,
       },
     },
 
@@ -86,8 +86,8 @@ const router = createRouter({
       component: DetailNursePage,
       props: true,
       meta: {
-        requiresAuth: false,
-        // requiresAdmin: true
+        requiresAuth: true,
+        requiresAdmin: false,
       },
     },
 
@@ -97,8 +97,8 @@ const router = createRouter({
       component: DetailReceptionistPage,
       props: true,
       meta: {
-        requiresAuth: false,
-        // requiresAdmin: true
+        requiresAuth: true,
+        requiresAdmin: false,
       },
     },
 
@@ -108,8 +108,8 @@ const router = createRouter({
       component: DetailDriverPage,
       props: true,
       meta: {
-        requiresAuth: false,
-        // requiresAdmin: true
+        requiresAuth: true,
+        requiresAdmin: false,
       },
     },
 
@@ -119,8 +119,8 @@ const router = createRouter({
       component: DetailDoctorPage,
       props: true,
       meta: {
-        requiresAuth: false,
-        // requiresAdmin: true
+        requiresAuth: true,
+        requiresAdmin: false,
       },
     },
 
@@ -130,8 +130,8 @@ const router = createRouter({
       component: DetailLaborantPage,
       props: true,
       meta: {
-        requiresAuth: false,
-        // requiresAdmin: true
+        requiresAuth: true,
+        requiresAdmin: false,
       },
     },
 
@@ -141,8 +141,8 @@ const router = createRouter({
       component: DetailMedicalPage,
       props: true,
       meta: {
-        requiresAuth: false,
-        // requiresAdmin: true
+        requiresAuth: true,
+        requiresAdmin: false,
       },
     },
 
@@ -151,8 +151,8 @@ const router = createRouter({
       name: "Branches",
       component: Branches,
       meta: {
-        requiresAuth: false,
-        // requiresAdmin: true
+        requiresAuth: true,
+        requiresAdmin: false,
       },
     },
     {
@@ -160,8 +160,8 @@ const router = createRouter({
       name: "Staff",
       component: Staff,
       meta: {
-        requiresAuth: false,
-        // requiresAdmin: true
+        requiresAuth: true,
+        requiresAdmin: false,
       },
     },
     {
@@ -169,8 +169,8 @@ const router = createRouter({
       name: "Laboratories",
       component: Laboratory,
       meta: {
-        requiresAuth: false,
-        // requiresAdmin: true
+        requiresAuth: true,
+        requiresAdmin: false,
       },
     },
 
@@ -178,6 +178,10 @@ const router = createRouter({
       path: "/dashboard",
       name: "Dashboard",
       component: Dashboard,
+      meta: {
+        requiresAuth: true,
+        requiresAdmin: true,
+      },
     },
     {
       path: "/unauthorized",
@@ -206,7 +210,8 @@ router.beforeEach((to, from, next) => {
   }
   next();
   // check if the route being navigated to exists in your routes
-});router.beforeEach((to, from, next) => {
+});
+router.beforeEach((to, from, next) => {
   const requiresAdmin = to.matched.some((record) => record.meta.requiresAdmin);
   const currentUser = auth.currentUser;
 
@@ -251,7 +256,6 @@ router.beforeEach((to, from, next) => {
     next();
   }
 });
-
 
 // Navigation guard to check if the user is a receptionist
 router.beforeEach((to, from, next) => {
