@@ -65,7 +65,7 @@
               <div v-if="$store.state.user" className="inline-block relative">
                 <button
                 @click="$store.dispatch('logout')"
-                style="display: block; width: 100%; padding: 12px; background-color: #4a5568; color: #fff; border-radius: 5px; border: none; cursor: pointer; text-align: center; font-size: 16px;"
+                style="display: block;width: 100%;/* padding: 12px; */background-color: rgb(74, 85, 104);color: rgb(255, 255, 255);border-radius: 5px;border: none;cursor: pointer;text-align: center;font-size: 16px;margin: 0 auto;"
                 >
                   Logout
                 </button>

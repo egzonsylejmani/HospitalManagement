@@ -47,7 +47,7 @@
             <h2>Edit Patient</h2>
             <form>
               <div v-for="(value, key) in editingUser" :key="key" class="form-group">
-                <div v-if="key != '_id' && key != '__v' && key != 'updatedAt' && key != 'createdAt'" class="form-group">
+                <div v-if="key != '_id' && key != '__v' && key != 'updatedAt' && key != 'createdAt' && key != 'Analysis' && key!= 'Diagnosis' && key!= 'HospitalHistory' && key!= 'PersonalHistory' && key !='Bills'" class="form-group">
                 <label :for="key">{{ key }}:</label>
                 <input type="text" v-model="editingUser[key]" :id="key">
                 </div>
