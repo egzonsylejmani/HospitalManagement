@@ -56,15 +56,17 @@
               <input type="text" v-model="editingUser[key]" :id="key">
               </div>
             </div>
+            <div class="Save">
             <button @click.prevent="saveUser">{{ editingUser.id ? 'Save' : 'Add' }}</button>
             <button @click.prevent="cancelEdit">Cancel</button>
+            </div>
           </form>
         </div>
       </div>
 
 
   <div class="modal" v-if="showAddModal">
-    <div class="modal-content">
+    <div class="modal-content" style="height: 250px;">
       <h2>Add Ward</h2>
       <form>
         <div class="form-group">
@@ -75,9 +77,10 @@
           <label for="image">Image:</label>
           <input type="text" v-model="newUser.Image" id="image">
         </div>
-        
+        <div class="Save">
         <button @click.prevent="addUser">Save</button>
         <button @click.prevent="showAddModal = false">Cancel</button>
+        </div>
       </form>
     </div>
   </div>

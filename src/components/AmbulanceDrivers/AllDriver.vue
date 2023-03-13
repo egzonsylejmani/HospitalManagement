@@ -63,7 +63,7 @@
 
 
       <div class="modal" v-if="showAddModal">
-        <div class="modal-content">
+        <div class="modal-content" style="height: 470px">
           <h2>Add Ambulance Driver</h2>
           <form>
             <div class="form-group">
@@ -87,9 +87,10 @@
                 <label for="image">Birthdate</label>
                 <input type="text" v-model="newUser.BirthDate" id="birthdate">
               </div>
-        
+              <div class="Save">
             <button @click.prevent="addUser">Save</button>
             <button @click.prevent="showAddModal = false">Cancel</button>
+            </div>
           </form>
         </div>
       </div>

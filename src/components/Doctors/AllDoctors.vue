@@ -59,7 +59,7 @@
       </div>
     </div>
     <div class="modal" v-if="showAddModal">
-        <div class="modal-content">
+        <div class="modal-content" style="height: 740px;">
           <h2>Add Doctor</h2>
           <form>
             <div class="form-group">
@@ -99,9 +99,10 @@
                 <label for="appointments">Appointments:</label>
                 <input type="text" v-model="newUser.Appointments" id="appointments">
             </div>
-        
+            <div class="Save">
             <button @click.prevent="addUser">Save</button>
             <button @click.prevent="showAddModal = false">Cancel</button>
+            </div>
           </form>
         </div>
       </div>

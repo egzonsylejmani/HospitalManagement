@@ -89,9 +89,10 @@
                     <label for="image">Image</label>
                     <input type="text" v-model="newUser.Image" id="Image">
                   </div>
-            
+                  <div class="Save">
                 <button @click.prevent="addUser">Save</button>
                 <button @click.prevent="showAddModal = false">Cancel</button>
+                </div>
               </form>
             </div>
           </div>

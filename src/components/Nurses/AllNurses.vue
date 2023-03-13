@@ -60,7 +60,7 @@
       </div>
 
     <div class="modal" v-if="showAddModal">
-          <div class="modal-content">
+          <div class="modal-content" style="height: 670px;">
             <h2>Add Nurse</h2>
             <form>
               <div class="form-group">
@@ -96,9 +96,10 @@
                       <input type="text" v-model="newUser.Speciality" id="speciality">
                   </div>
   
-        
+                  <div class="Save">
               <button @click.prevent="addUser">Save</button>
               <button @click.prevent="showAddModal = false">Cancel</button>
+              </div>
             </form>
           </div>
         </div>
