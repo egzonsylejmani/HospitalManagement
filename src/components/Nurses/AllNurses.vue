@@ -44,7 +44,7 @@
     </div>
     
     <div class="modal" v-if="editingUser">
-        <div class="modal-content">
+        <div class="modal-content" style="height: 675px">
           <h2>Edit Nurse</h2>
           <form>
             <div v-for="(value, key) in editingUser" :key="key" class="form-group">
@@ -53,8 +53,10 @@
               <input type="text" v-model="editingUser[key]" :id="key">
               </div>
             </div>
+            <div class="Save">
             <button @click.prevent="saveUser">{{ editingUser.id ? 'Save' : 'Add' }}</button>
             <button @click.prevent="cancelEdit">Cancel</button>
+            </div>
           </form>
         </div>
       </div>

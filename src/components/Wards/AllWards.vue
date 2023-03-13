@@ -47,7 +47,7 @@
   </div>
 
   <div class="modal" v-if="editingUser">
-        <div class="modal-content">
+        <div class="modal-content" style="height: 250px">
           <h2>Edit Ward</h2>
           <form>
             <div v-for="(value, key) in editingUser" :key="key" class="form-group">

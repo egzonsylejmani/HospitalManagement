@@ -90,9 +90,9 @@
                     </router-link>
                   </li>
                   <li cla ssName="">
-                    <button
+                    <button  style="width: 200px;"
                       @click="logoutHandler"
-                      className="flex items-center px-4 py-2 bg-gray-100 hover:bg-gray-300 rounded-b text-left text-gray-800 hover:text-gray-600"
+                      class="flex items-center justify-center w-48 px-4 py-2 bg-gray-100 hover:bg-gray-300 rounded-b text-left text-gray-800 hover:text-gray-600">
                     >
                       <svg
                         className="fill-current w-4 h-4 mr-2"

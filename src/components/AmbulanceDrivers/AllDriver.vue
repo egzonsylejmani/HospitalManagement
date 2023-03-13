@@ -55,8 +55,10 @@
                   <input type="text" v-model="editingUser[key]" :id="key">
                   </div>
                 </div>
+                <div class="Save">
                 <button class="save" @click.prevent="saveUser">{{ editingUser.id ? 'Save' : 'Add' }}</button>
                 <button class="cancel" @click.prevent="cancelEdit">Cancel</button>
+                </div>
               </form>
             </div>
           </div>

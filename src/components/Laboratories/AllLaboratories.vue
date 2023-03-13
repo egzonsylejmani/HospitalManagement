@@ -22,7 +22,7 @@
                         <td class="border px-4 py-2">{{ user.Type }}</td>
 
 
-
+                      
                         <td class="border px-4 py-2 flex">
                             <button @click="editUser(user)"
                                 class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2">
@@ -42,7 +42,7 @@
         </div>
     </div>
     <div class="modal" v-if="editingUser">
-        <div class="modal-content">
+        <div class="modal-content" style="height: 330px">
           <h2>Edit Laboratory</h2>
           <form>
             <div v-for="(value, key) in editingUser" :key="key" class="form-group">
@@ -61,7 +61,7 @@
 
 
   <div class="modal" v-if="showAddModal">
-    <div class="modal-content">
+    <div class="modal-content" style="height: 350px">
       <h2>Add Laboratory</h2>
       <form>
         <div class="form-group">
@@ -76,8 +76,10 @@
                 <label for="image">Image:</label>
                 <input type="text" v-model="newUser.Image" id="image">
             </div>
+            <div class="Save">
         <button @click.prevent="addUser">Save</button>
         <button @click.prevent="showAddModal = false">Cancel</button>
+        </div>
       </form>
     </div>
   </div>

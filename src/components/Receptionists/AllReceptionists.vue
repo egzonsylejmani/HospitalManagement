@@ -15,9 +15,8 @@
                         <th class="border px-4 py-2">Name</th>
                         <th class="border px-4 py-2">Surname</th>
                         <th class="border px-4 py-2">Phone</th>
-                        <th class="border px-4 py-2">Ward</th>
                         <th class="border px-4 py-2">Email</th>
-                        <th class="border px-4 py-2">Birthdate</th>
+                        <th class="border px-4 py-2">Ward</th>
                         <th class="border px-4 py-2">Actions</th>
                     </tr>
                 </thead>
@@ -27,9 +26,7 @@
                         <td class="border px-4 py-2">{{ user.Lastname }}</td>
                         <td class="border px-4 py-2">{{ user.Phone }}</td>
                         <td class="border px-4 py-2">{{ user.Email }}</td>
-                        <td class="border px-4 py-2">{{ user.Birthdate }}</td>
-                         <td class="border px-4 py-2">{{ user.Ward }}</td>
-
+                        <td class="border px-4 py-2">{{ user.Ward }}</td>
                         <td class="border px-4 py-2 flex">
                             <button @click="editUser(user)"
                                 class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2">
@@ -65,7 +62,7 @@
           </div>
         </div>
     <div class="modal" v-if="editingUser">
-          <div class="modal-content">
+          <div class="modal-content" style="height: 610px">
             <h2>Edit User</h2>
             <form>
               <div v-for="(value, key) in editingUser" :key="key" class="form-group">
@@ -74,8 +71,10 @@
                 <input type="text" v-model="editingUser[key]" :id="key">
                 </div>
               </div>
+              <div class="Save">
               <button @click.prevent="saveUser">{{ editingUser.id ? 'Save' : 'Add' }}</button>
               <button @click.prevent="cancelEdit">Cancel</button>
+              </div>
             </form>
           </div>
         </div>
