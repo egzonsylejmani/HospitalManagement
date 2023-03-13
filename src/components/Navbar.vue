@@ -65,17 +65,8 @@
               <div v-if="$store.state.user" className="inline-block relative">
                 <button
                 @click="$store.dispatch('logout')"
-                  className="flex items-center px-4 py-2 bg-gray-100 hover:bg-gray-300 rounded-b text-left text-gray-800 hover:text-gray-600"
+                style="display: block; width: 100%; padding: 12px; background-color: #4a5568; color: #fff; border-radius: 5px; border: none; cursor: pointer; text-align: center; font-size: 16px;"
                 >
-                  <svg
-                    className="fill-current w-4 h-4 mr-2"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"
-                    />
-                  </svg>
                   Logout
                 </button>
                 <ul
@@ -92,7 +83,7 @@
                   <li cla ssName="">
                     <button  style="width: 200px;"
                       @click="logoutHandler"
-                      class="flex items-center justify-center w-48 px-4 py-2 bg-gray-100 hover:bg-gray-300 rounded-b text-left text-gray-800 hover:text-gray-600">
+                      class="logout">
                     >
                       <svg
                         className="fill-current w-4 h-4 mr-2"
